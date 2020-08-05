@@ -41,16 +41,6 @@ namespace BattleShip.API.Controllers
             var statisticsRecords = mapper.Map<IEnumerable<StatisticsRecord>, List<StatisticView>>(pagedRecords);
 
             Response.AddPagination(pagedRecords.CurrentPage, pagedRecords.PageSize, pagedRecords.TotalCount, pagedRecords.TotalPages);
-            
-            //var count = records.Count();
-            //var items = records.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            //StatisticsViewModel viewModel = new StatisticsViewModel
-            //{
-            //    PageViewModel = new PageViewModel(count, page, pageSize),
-            //    StatisticsRecords = items,
-            //    SortedStatisticsRecord = new SortedStatisticsRecord(sortOrder),
-            //    FilterStatisticsRecord = new FilterStatisticsRecord(name, filterMoveState, onlyIntactShips)
-            //};
 
             return Ok(statisticsRecords);
         }
