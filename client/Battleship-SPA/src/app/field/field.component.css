@@ -1,0 +1,12 @@
+.battlefield-cell-content {
+    height: 40px;
+    width: 40px;
+    border: 1px solid black;
+    position: relative;
+}
+.battlefield-cell-content > .ship{
+    position: absolute;
+    height: 100%; 
+    background-color: green;
+    z-index: 1;
+}

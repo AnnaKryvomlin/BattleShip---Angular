@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-5">
+    <div class='field' cdkDropListGroup>
+      <div *ngFor="let row of board; let y=index" class='row'>
+        <div *ngFor="let box of row; let x=index" class='column'>
+          <div cdkDropList [cdkDropListData]="box" [style.pointer-events]="disabledDrop(box, x, y) ? 'none' : 'auto'"
+            (cdkDropListDropped)="drop($event, x+1, y+1)" cdkDropListOrientation="vertical" class="battlefield-cell-content">
+            <div *ngIf="box.ship" (cdkDragStarted)="draggableShip = $event.source.data" (cdkDragEnded)="draggableShip = null" 
+              class="ship" cdkDrag [cdkDragData]="box.ship" [style.width.%]="100 * box.ship.size"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-7">
+    <button class="btn btn-outline-dark" (click) = "createGame()">Create Game</button>
+  <br>
+    <button class="btn btn-outline-dark mt-2" (click) = "findGame()">Find Game</button>
+  </div>
+</div>
+
+

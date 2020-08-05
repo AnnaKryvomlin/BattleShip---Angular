@@ -1,0 +1,35 @@
+<table class="table table-bordered">
+  <thead class="thead-inverse">
+    <tr>
+        <th>
+            <a class="text-dark">
+                Победитель
+            </a>
+        </th>
+        <th>
+            <a class="text-dark">
+                Количество ходов
+            </a>
+        </th>
+        <th>
+            <a class="text-dark">
+                Количество выживших кораблей
+            </a>
+        </th>
+        <th>
+            <p class="text-dark">
+                Оставшиеся корабли
+            </p>
+        </th>
+    </tr>
+  <tbody>
+<tr *ngFor="let record of records">
+  <td>{{record.winner}}</td>
+  <td>{{record.moveCount}}</td>
+  <td>{{record.winnerShipsCount}}</td>
+  <td>
+    <span *ngFor="let ship of record.winnerShips"> {{ship.size}} - палубный <span *ngIf="ship.injuredCells != 0">(ранено {{ship.injuredCells}})</span></span>
+  </td>
+</tr>
+  </tbody>
+</table>

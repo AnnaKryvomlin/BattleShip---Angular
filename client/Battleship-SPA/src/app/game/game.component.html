@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-6">
+    <h5 class="my-2">My field</h5>
+  <div class='field'>
+    <div *ngFor="let row of board; let y=index" class='row'>
+      <div *ngFor="let box of row; let x=index" class='column'>
+        <div  *ngIf="box.includeShip" class="battlefield-cell-content ship-on-field">
+        </div>
+        <div  *ngIf="box.mark" class="battlefield-cell-content mark">
+        </div>
+        <div  *ngIf="box.markShip" class="battlefield-cell-content mark-ship">
+         </div>
+         <div  *ngIf="!box.markShip && !box.mark && !box.includeShip" class="battlefield-cell-content">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-6">
+  <h5 class="my-2">Enemy field</h5>
+  <div class='field'>
+    <div *ngFor="let row of enemyBoard; let y=index" class='row'>
+      <div *ngFor="let box of row; let x=index" class='column'>
+        <button *ngIf="!box.mark && !box.markShip" class="battlefield-cell-content enemy-cell btn" 
+        [disabled]='currentPlayerId != myId' (click) ="TakeAShot(x+1, y+1)" ></button>
+        <div *ngIf="box.mark" class="battlefield-cell-content mark"></div>
+        <div *ngIf="box.markShip" class="battlefield-cell-content mark-ship"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
