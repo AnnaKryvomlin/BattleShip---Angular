@@ -15,7 +15,7 @@ export class StatisticsService {
   
 constructor(private http: HttpClient) { }
 
-GetAllRecords(page?, name?, filter?, onlyIntactShips?): Observable<PaginatedResult<Record[]>>
+GetAllRecords(page?, name?, filter?, onlyIntactShips?, sortState?): Observable<PaginatedResult<Record[]>>
 {
   const paginationResult: PaginatedResult<Record[]> = new PaginatedResult<Record[]>();
   let params = new HttpParams();
@@ -37,6 +37,11 @@ GetAllRecords(page?, name?, filter?, onlyIntactShips?): Observable<PaginatedResu
   if(onlyIntactShips != null)
   {
     params = params.append('onlyIntactShips', onlyIntactShips);
+  }
+
+  if(sortState != null)
+  {
+    params = params.append('sortOrder', sortState);
   }
 
   return this.http.get<Record[]>(this.baseUrl, {observe: 'response', params})

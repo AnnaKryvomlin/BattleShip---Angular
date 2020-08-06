@@ -30,6 +30,7 @@ namespace BattleShip.API.Controllers
         public IActionResult GetStatistics(int page = 1, string name = "", bool onlyIntactShips = false, FilterMoveState filterMoveState = FilterMoveState.All, SortState sortOrder = SortState.NameAsc)
         {
             int pageSize = 3;
+          //  SortedStatisticsRecord sortedStatisticsRecord = new SortedStatisticsRecord(sortState);
             var records = this.statisticsService.GetStatisticsRecords(name, onlyIntactShips, sortOrder, filterMoveState).ToList();
             var mapperWS = new MapperConfiguration(cfg => cfg.CreateMap<WinnerShip, StatisticsShipViewModel>()).CreateMapper();
 
