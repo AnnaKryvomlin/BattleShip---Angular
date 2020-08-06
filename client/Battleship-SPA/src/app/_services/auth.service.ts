@@ -34,10 +34,6 @@ export class AuthService {
     return !this.jwtHelper.isTokenExpired(token);
   }
 
-  logout(){
-    this.http.get(this.baseUrl + 'logout');
-  }
-
   getToken(): string {
     try {
         const token = localStorage.getItem('token');
@@ -46,7 +42,6 @@ export class AuthService {
         }
         if (this.jwtHelper.isTokenExpired(token))
          {      
-            this.logout();
             throw new Error('Token is expired');
          }
   

@@ -94,12 +94,5 @@ namespace BattleShip.API.Controllers
                 token = tokenHandler.WriteToken(token)
             });
         }
-
-        [HttpGet("logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await this.signInManager.SignOutAsync();
-            return new OkObjectResult("Logout");
-        }
     }
 }

@@ -37,7 +37,11 @@ namespace BattleShip.API
             services.ConfigureUnitOfWork();
             services.ConfigureServices();
             services.AddControllers();
-            services.AddCors();
+            services.AddCors(options => options.AddPolicy("Cors", builder =>
+                builder.
+                AllowAnyOrigin().
+                AllowAnyHeader().
+                AllowAnyMethod()));
             services.AddSignalR();
 
             services.AddAuthorization(options =>
@@ -87,10 +91,10 @@ namespace BattleShip.API
             }
 
             app.UseHttpsRedirection();
- 
+
             app.UseRouting();
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors("Cors");
 
             app.UseAuthentication();
             app.UseAuthorization();

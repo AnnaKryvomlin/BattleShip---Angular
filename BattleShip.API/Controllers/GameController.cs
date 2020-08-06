@@ -115,5 +115,14 @@ namespace BattleShip.API.Controllers
             int currentMove = game.CurrentMovePlayerId;
             return Ok(currentMove);
         }
+
+        [HttpGet("get_records/{id}")]
+        public IActionResult Game(int id)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Move, RecordsView>()).CreateMapper();
+            var records = mapper.Map<IEnumerable<Move>, List<RecordsView>>(this.gameService.GetAllRecords(id));
+            return Ok(records);
+        }
+
     }
 }

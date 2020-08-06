@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { environment } from "../../environments/environment";
 import { Observable } from 'rxjs';
 import { Coordinate } from '../_models/Coordinate';
+import { Record } from '../_models/record.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,9 +38,14 @@ getEnemyCoords(id: number): Observable<Coordinate[]>
   return this.http.get<Coordinate[]>(this.baseUrl + 'enemy_coords/' + id);
 }
 
-getCuurentplayerId(id: number): Observable<number>
+getCurrentplayerId(id: number): Observable<number>
 {
   return this.http.get<number>(this.baseUrl + 'get_current_player/' + id);
+}
+
+getRecords(id: number): Observable<Record[]>
+{
+  return this.http.get<Record[]>(this.baseUrl + 'get_records/' + id);
 }
 
 }

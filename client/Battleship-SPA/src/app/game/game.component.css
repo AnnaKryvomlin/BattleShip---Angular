@@ -32,3 +32,15 @@
     background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
     background-color: #f6f6f6;
 }
+
+.records {
+    width: 900px;
+    height: 300px;
+    overflow: auto;
+}
+
+.container-records {
+    width: 880px;
+    height: 500px;
+    position: relative;
+}

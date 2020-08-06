@@ -4,7 +4,9 @@ import { GameService } from '../_services/game.service';
 import { ActivatedRoute } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { AuthService } from '../_services/auth.service';
- import * as signalR from '@microsoft/signalr';
+import { Record } from '../_models/record.model';
+import * as signalR from '@microsoft/signalr';
+import { runInThisContext } from 'vm';
 
 interface IBox {
   mark: boolean;
@@ -19,15 +21,15 @@ interface IBox {
 })
 export class GameComponent implements OnInit {
 
-  // hub
   private hubConnection: HubConnection;
   isShip: boolean;
   x: number;
   y: number;
-  // for building boards
   gameId: number;
   myId: number;
   currentPlayerId: number;
+  records: Record[] = [];
+   // for building boards
   private readonly boardSize = 10;
   myCoords: Coordinate[] = [];
   enemyCoords: Coordinate[] = [];
@@ -42,18 +44,33 @@ export class GameComponent implements OnInit {
     this.gameId = +this.route.snapshot.paramMap.get('id');
     this.myId = +this.authService.decodedToken.nameid[0];
     this.hubConnection = new HubConnectionBuilder()
-    .withUrl('http://localhost:44336/gamehub')
+    .withUrl('https://localhost:44336/gamehub', {
+      skipNegotiation: true,
+      transport: signalR.HttpTransportType.WebSockets
+    })
     .withAutomaticReconnect()
     .configureLogging(signalR.LogLevel.Debug)
     .build();
 
     this.hubConnection
     .start()
-    .then(() => console.log('Connection started!!!'))
-    .catch(err => console.log('Error while establishing connection :(' + err));
+    .then(() => this.hubConnection
+    .invoke('JoinGame', this.gameId))
+    .catch(err => { err => console.log(err)});
 
     this.hubConnection.on('TakeAShot', (result: boolean, x: number, y: number, currentPlayerId: number) => {
-      console.log(x);
+      this.takeAShot(x, y);
+      this.currentPlayerId = currentPlayerId;
+    });
+
+    this.hubConnection.on('ShowAShot', (x: number, y: number, currentPlayerId: number) => {
+      this.showAShot(x, y);
+      this.currentPlayerId = currentPlayerId;
+    });
+
+    this.hubConnection.on('NewRecord', (record: string) => {
+      let rec: Record = { playerMove: record };
+      this.records.push(rec);
     });
 
     // set user's and enemy's boards
@@ -63,7 +80,7 @@ export class GameComponent implements OnInit {
      this.gameService.getEnemyCoords(this.gameId)
      .subscribe(coordendata => {
       this.enemyCoords = coordendata;
-      this.gameService.getCuurentplayerId(this.gameId)
+      this.gameService.getCurrentplayerId(this.gameId)
      .subscribe(iddata => {
       this.currentPlayerId = iddata;
       this.setBoard(this.myCoords);
@@ -71,6 +88,21 @@ export class GameComponent implements OnInit {
     });
   });
     });
+
+    this.gameService.getRecords(this.gameId)
+    .subscribe(data => {
+     this.records = data; 
+    });
+  }
+
+  showAShot(x: number, y: number) {
+    const coord = this.myCoords.find(c => c.x == x && c.y == y).mark = true;
+    this.setBoard(this.myCoords);
+  }
+
+  takeAShot(x: number, y: number) {
+    const coord = this.enemyCoords.find(c => c.x == x && c.y == y).mark = true;
+    this.setEnemyBoard(this.enemyCoords);
   }
 
   setEnemyBoard(coords: Coordinate[]) {
