@@ -22,6 +22,8 @@ import { AccountComponent } from './account/account.component';
 import { GameComponent } from './game/game.component';
 import { StatisticComponent } from './statistic/statistic.component';
 
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+
 
 @NgModule({
    declarations: [
@@ -39,7 +41,8 @@ import { StatisticComponent } from './statistic/statistic.component';
       CommonModule,
       FormsModule,
       DragDropModule,
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      PaginationModule.forRoot()
    ],
    providers: [
       AlertifyService,
