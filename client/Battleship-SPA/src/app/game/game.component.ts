@@ -6,7 +6,8 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { AuthService } from '../_services/auth.service';
 import { Record } from '../_models/record.model';
 import * as signalR from '@microsoft/signalr';
-import { runInThisContext } from 'vm';
+import { Router } from '@angular/router';
+import { AlertifyService } from '../_services/alertify.service';
 
 interface IBox {
   mark: boolean;
@@ -36,7 +37,8 @@ export class GameComponent implements OnInit {
   public board: Array<Array<IBox>> = [];
   public enemyBoard: Array<Array<IBox>> = [];
 
-  constructor(private authService: AuthService, private gameService: GameService, private route: ActivatedRoute) {
+  constructor(private authService: AuthService, private gameService: GameService, private route: ActivatedRoute,
+              private router: Router, private alertify: AlertifyService) {
    }
 
   ngOnInit() 
@@ -71,6 +73,16 @@ export class GameComponent implements OnInit {
     this.hubConnection.on('NewRecord', (record: string) => {
       let rec: Record = { playerMove: record };
       this.records.push(rec);
+    });
+
+    this.hubConnection.on('Finished', (message: string) => {
+      this.alertify.success('Игра завершена! ' + message);
+      this.router.navigate(['/account']);
+    });
+
+    this.hubConnection.on('StopGame', (message: string) => {
+      this.alertify.success('Игра завершена! ' + message);
+      this.router.navigate(['/account']);
     });
 
     // set user's and enemy's boards
@@ -147,6 +159,12 @@ export class GameComponent implements OnInit {
   public TakeAShot(x: number, y: number) {
     this.hubConnection
     .invoke('TakeAShot', this.myId, this.gameId, x, y)
+    .catch(err => console.error(err));
+  }
+
+  public TrowUpTheTowel() {
+    this.hubConnection
+    .invoke('TrowUpTheTowel', this.myId, this.gameId)
     .catch(err => console.error(err));
   }
 
