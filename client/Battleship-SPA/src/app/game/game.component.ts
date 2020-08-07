@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Coordinate } from '../_models/Coordinate';
+import { Coordinate } from '../_models/coordinate-model';
 import { GameService } from '../_services/game.service';
 import { ActivatedRoute } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';

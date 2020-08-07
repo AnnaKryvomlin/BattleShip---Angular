@@ -20,5 +20,4 @@ constructor(private authService: AuthService, private alertify: AlertifyService,
     this.router.navigate(['home']);
     return false;
   }
-  
 }

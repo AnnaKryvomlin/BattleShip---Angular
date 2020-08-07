@@ -3,7 +3,7 @@ import { HttpClient, HttpParams  } from "@angular/common/http";
 import { AuthService } from './auth.service';
 import { environment } from "../../environments/environment";
 import { Observable } from 'rxjs';
-import { Coordinate } from '../_models/Coordinate';
+import { Coordinate } from '../_models/coordinate-model';
 import { Record } from '../_models/record.model';
 
 @Injectable({

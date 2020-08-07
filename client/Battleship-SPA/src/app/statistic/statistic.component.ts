@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { Record } from '../_models/Record';
+import { Record } from '../_models/statistic-record.model';
 import {StatisticsService} from '../_services/statistics.service';
 import { Pagination, PaginatedResult } from '../_models/pagination.model';
 import { filter } from 'rxjs/operators';
