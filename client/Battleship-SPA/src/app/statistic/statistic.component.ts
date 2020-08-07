@@ -68,34 +68,19 @@ export class StatisticComponent implements OnInit {
   }
 
   changeSortName() {
-    if( this.sortName == 0){
-      this.sortName = 1;
-    }
-    else {
-      this.sortName = 0;
-    }
+    this.sortName == 0 ? this.sortName = 1 :  this.sortName = 0;
     this.sortState = this.sortName;
     this.loadRecords();
   }
 
   changeSortMoveCount() {
-    if( this.sortMove == 2){
-      this.sortMove = 3;
-    }
-    else {
-      this.sortMove = 2;
-    }
+    this.sortName == 2 ? this.sortName = 3 :  this.sortName = 2;
     this.sortState = this.sortMove;
     this.loadRecords();
   }
 
   changeSortShipCount() {
-    if( this.sortShipCount == 4){
-      this.sortShipCount = 5;
-    }
-    else {
-      this.sortShipCount = 4;
-    }
+    this.sortName == 4 ? this.sortName = 5 :  this.sortName = 4;
     this.sortState = this.sortShipCount;
     this.loadRecords();
   }

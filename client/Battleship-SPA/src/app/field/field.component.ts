@@ -52,7 +52,6 @@ export class FieldComponent implements OnInit {
       yLine.push(xLine);
     }
     this.board = yLine;
-    console.log(this.board);
   }
 
   disabledDrop(cell: IBox, x: number, y: number){

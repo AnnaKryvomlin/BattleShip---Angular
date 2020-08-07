@@ -1,7 +1,7 @@
 <form  #form="ngForm" (ngSubmit)="loadRecords()">
   <div class="form-row">
       <div class="col-3">
-          <label for="name">Имя: </label>
+          <label for="name">Name: </label>
           <input type="text" class="form-control" name="name" id='name' [(ngModel)]="name">
       </div>
       <div class="col-4">
@@ -16,7 +16,7 @@
         (change)="loadRecords()"/>
       </div>
       <div class="col-3">
-          <label for="filter">Количество ходов: </label>
+          <label for="filter">Move Count: </label>
           <select [(ngModel)]="filter" class="form-control" id="filterMoveState" name="filterMoveState" (change) ="loadRecords()">
             <option *ngFor="let item of filterList" [value] = "item.value">{{item.display}}</option>
           </select>
@@ -34,22 +34,22 @@
     <tr>
         <th>
             <div  class="text-dark" (click)="changeSortName()">
-                Победитель
+                Winner
             </div>
         </th>
         <th>
             <div  class="text-dark"  (click)="changeSortMoveCount()">
-                Количество ходов
+                Move Count
             </div>
         </th>
         <th>
             <div  class="text-dark"  (click)="changeSortShipCount()">
-                Количество выживших кораблей
+                Survivor Ship Count
             </div>
         </th>
         <th>
             <p class="text-dark">
-                Оставшиеся корабли
+              Survivor Ships
             </p>
         </th>
     </tr>
