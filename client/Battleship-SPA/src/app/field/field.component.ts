@@ -77,7 +77,28 @@ export class FieldComponent implements OnInit {
     ship.x = x;
     ship.y = y;
     console.log(x +", " + y);
+
+    const neighborTopShips = this.ships.filter(s => s.y === (y - 1));
+    const neighborBottomShips = this.ships.filter(s => s.y === (y + 1));
+    if(this.checkIfCanDrob(neighborTopShips, ship) || this.checkIfCanDrob(neighborBottomShips, ship)){
+      return;
+    }
+
     this.setBoard();
+  }
+
+  checkIfCanDrob(neighborShips: Ship[], ship: Ship) : boolean{
+    for(let s of neighborShips)
+    {
+      for (let i = s.x; i <= s.x + s.size - 1; i++) {
+      for (let j = ship.x; j <= ship.x + ship.size - 1; j++) {
+        if(i == j) {
+        return true;
+        }
+      }
+      }
+    }
+    return false;
   }
 
   createGame(){
