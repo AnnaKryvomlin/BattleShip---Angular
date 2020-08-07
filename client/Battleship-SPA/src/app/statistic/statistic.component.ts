@@ -22,24 +22,10 @@ export class StatisticComponent implements OnInit {
   {value: 2, display: "41-100"},
   {value: 3, display: "more than 100"}];
   filter: number;
-  // sortListName = [{value: 0},
-  // {value: 1}];
   sortName: number;
-  // sortListMove = [{value: 2},
-  // {value: 3}];
   sortMove: number;
-  // sortListShipCount = [{value: 4},
-  // {value: 5}];
   sortShipCount: number;
   sortState: number;
-  //  sortList = [{value: 0},
-  //   {value: 1}, {value: 2},
-  //   {value: 3}, {value: 4},
-  //   {value: 5}];
-
-  // sortList =[{
-  //   NameSort: false
-  // }]
 
   constructor(private statisticsService: StatisticsService) { }
 
@@ -74,7 +60,6 @@ export class StatisticComponent implements OnInit {
   }
 
   loadRecords() {
-    console.log(this.filter);
     this.statisticsService.GetAllRecords(this.pagination.currentPage, this.name, this.filter, this.onlyIntactShips, this.sortState)
     .subscribe((res: PaginatedResult<Record[]>) => {
      this.records = res.result;

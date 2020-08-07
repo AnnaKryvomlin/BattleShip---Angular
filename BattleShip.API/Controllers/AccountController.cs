@@ -46,21 +46,16 @@ namespace BattleShip.API.Controllers
             var result = await this.userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
-                return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
+                return BadRequest(result.Errors);
 
             this.playerService.CreatePlayer(user);
 
-            return new OkObjectResult("Account created");
+            return Ok();
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var result = await this.signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
 
             if (!result.Succeeded)

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
@@ -17,12 +17,14 @@ import { HomeComponent } from './home/home.component';
 
 import {appRoutes} from './routs';
 import { AuthService } from './_services/auth.service';
-import { AuthIntercepterProvider } from './iterceptors/auth.intercepter';
+import { AuthIntercepterProvider } from './iterceptors/auth.interceptor';
+import { ErrorInterceptorProvider } from './iterceptors/error.interceptor';
 import { AccountComponent } from './account/account.component';
 import { GameComponent } from './game/game.component';
 import { StatisticComponent } from './statistic/statistic.component';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
       HomeComponent,
       AccountComponent,
       GameComponent,
-      StatisticComponent
+      StatisticComponent,
+      RegisterComponent
    ],
    imports: [
       BrowserModule,
@@ -42,13 +45,15 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
       FormsModule,
       DragDropModule,
       RouterModule.forRoot(appRoutes),
-      PaginationModule.forRoot()
+      PaginationModule.forRoot(),
+      ReactiveFormsModule
    ],
    providers: [
       AlertifyService,
       GameService,
       AuthService,
       AuthIntercepterProvider,
+      ErrorInterceptorProvider,
       AccountService
    ],
    bootstrap: [

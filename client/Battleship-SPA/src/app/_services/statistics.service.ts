@@ -51,7 +51,6 @@ GetAllRecords(page?, name?, filter?, onlyIntactShips?, sortState?): Observable<P
       if(response.headers.get('Pagination') != null){
         paginationResult.pagination = JSON.parse(response.headers.get('Pagination'))
       }
-      console.log(paginationResult);
       return paginationResult;
     }));
 }

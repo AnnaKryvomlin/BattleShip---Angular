@@ -10,9 +10,6 @@ export class AuthIntercepter implements HttpInterceptor {
     constructor(private authService: AuthService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      /*  if(!req.url.toLowerCase().includes(environment.apiUrl)){
-            return next.handle(req);
-        } */
         let headers = new HttpHeaders({
             'Content-Type': 'application/json'
         });
