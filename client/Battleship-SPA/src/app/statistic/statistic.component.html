@@ -33,19 +33,19 @@
   <thead class="thead-inverse">
     <tr>
         <th>
-            <div  class="text-dark" (click)="changeSortName()">
+            <a  class="filter-title" (click)="changeSortName()">
                 Winner
-            </div>
+            </a>
         </th>
         <th>
-            <div  class="text-dark"  (click)="changeSortMoveCount()">
+            <a  class=" filter-title"  (click)="changeSortMoveCount()">
                 Move Count
-            </div>
+            </a>
         </th>
         <th>
-            <div  class="text-dark"  (click)="changeSortShipCount()">
+            <a  class="filter-title"  (click)="changeSortShipCount()">
                 Survivor Ship Count
-            </div>
+            </a>
         </th>
         <th>
             <p class="text-dark">
@@ -66,10 +66,10 @@
 </table>
 
 <div class="d-flex justify-content-center">
-  <pagination [boundaryLinks]="true"
-              [totalItems]="pagination.totalItems"
+  <pagination [boundaryLinks]="true"          
               [(ngModel)] = "pagination.currentPage"
               [itemsPerPage] = 'pagination.itemsPerPage'
+              [totalItems]='pagination.totalItems'
               (pageChanged)="pageChanged($event)"
   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
 </pagination>

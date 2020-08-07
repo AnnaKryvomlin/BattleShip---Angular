@@ -34,7 +34,7 @@ export class NavComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
-    this.alertify.message('Goodbye ' + this.authService.decodedToken.nameid[1]);
+    this.alertify.message('Goodbye');
     this.router.navigate(['/home']);
   }
 

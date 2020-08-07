@@ -30,11 +30,11 @@ export class StatisticComponent implements OnInit {
   constructor(private statisticsService: StatisticsService) { }
 
   ngOnInit() {
-    
     this.statisticsService.GetAllRecords(this.page)
     .subscribe(data => {
      this.records = data.result;
      this.pagination = data.pagination;
+     console.log( this.pagination.totalItems);
    });
 
    this.name = "";
@@ -64,6 +64,7 @@ export class StatisticComponent implements OnInit {
     .subscribe((res: PaginatedResult<Record[]>) => {
      this.records = res.result;
      this.pagination = res.pagination;
+     console.log( this.pagination.totalItems);
    });
   }
 
